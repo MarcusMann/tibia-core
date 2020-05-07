@@ -1,12 +1,19 @@
-from .crawler import Crawler
+from configparser import ConfigParser
+from urllib.parse import urljoin
+
 from crawler.downloader import Downloader
 
+from . import crawler
 
-class Tibia:
-    def __init__(self, default_url: str):
-        self.default_url = default_url
-        self.downloader = Downloader()
+config = ConfigParser()
+config.read("config.ini")
+
+
+class Crawler(crawler.Crawler):
+    def __init__(self, param: str, downloader=Downloader()):
+        super().__init__(
+            downloader, urljoin(config.get("default", "default_url"), param)
+        )
 
     async def init(self):
-        crawler = Crawler(self.downloader, self.default_url)
-        return await crawler.download()
+        return await self.download()
