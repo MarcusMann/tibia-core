@@ -13,6 +13,3 @@ format:
 .PHONY: test-update
 test-update:
 	@pytest --force-regen
-
-
-
