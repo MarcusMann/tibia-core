@@ -1,0 +1,11 @@
+.github
+.vscode
+tests
+.dockerignore
+.gitignore
+Dockerfile
+Makefile
+requirements.in
+.venv
+__pycache__
+.pytest_cache
