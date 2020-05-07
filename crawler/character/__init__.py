@@ -1,5 +1,5 @@
 from .crawler import Crawler
-from tibia.downloader import Downloader
+from crawler.downloader import Downloader
 
 
 class Tibia:

@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from tibia.crawler.parser import Parser
+from crawler.character.parser import Parser
 
 
 def test_extract_name(output_html, data_regression):
