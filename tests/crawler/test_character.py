@@ -7,8 +7,8 @@ import pytest
 @mock.patch("crawler.character.Downloader", new_callable=mock.AsyncMock)
 async def test_character_crawler(mock_downloader, data_regression, output_html):
     downloader = mock_downloader.return_value
-    downloader.get.return_value = mock.AsyncMock(text=output_html)
+    downloader.post.return_value = mock.AsyncMock(text=output_html)
 
-    crawler = Crawler("library/?subtopic=creatures", downloader)
+    crawler = Crawler("community/?subtopic=characters", downloader)
     response = await crawler.init()
     data_regression.check(response)
