@@ -1,6 +1,6 @@
 .PHONY: test
 test:
-	@pytest -vv tests
+	@pytest -vv --cov=crawler tests
 
 .PHONY: check
 check:
