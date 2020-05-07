@@ -12,20 +12,20 @@ class Downloader:
 
     async def get(self, url: str):
         response = await self.downloader.get(url)
-        
+
         return Response(
             text=response.text,
             content=response.content,
             status_code=response.status_code,
-            headers=response.headers
+            headers=response.headers,
         )
 
     async def post(self, url):
         response = await self.downloader.post(url)
-        
+
         return Response(
             text=response.text,
             content=response.content,
             status_code=response.status_code,
-            headers=response.headers
+            headers=response.headers,
         )

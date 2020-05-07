@@ -1,4 +1,3 @@
-
 class Crawler:
     def __init__(self, downloader, default_url: str):
         self.downloader = downloader
