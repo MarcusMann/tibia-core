@@ -9,5 +9,4 @@ class Crawler:
 
     async def download(self):
         response = await self.downloader.get(self.default_url)
-
         return self.parser.parse(response.text)
