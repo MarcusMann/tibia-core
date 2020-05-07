@@ -1,6 +1,5 @@
 from configparser import ConfigParser
 from urllib.parse import urljoin
-
 from crawler.downloader import Downloader
 
 from . import crawler
