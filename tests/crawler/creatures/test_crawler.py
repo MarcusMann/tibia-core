@@ -15,5 +15,5 @@ async def test_crawler(downloader_mock, creatures_html, creature_html, data_regr
     downloader.get.side_effect = [creatures_html, creature_html]
 
     crawler = Crawler(downloader, default_url)
-    response = await crawler.download()
-    data_regression.check(crawler.get_creatures)
+    await crawler.download()
+    data_regression.check(crawler.creatures)
