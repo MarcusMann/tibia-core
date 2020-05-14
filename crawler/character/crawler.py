@@ -16,6 +16,7 @@ class Crawler:
         with DB() as database:
             database.characters.insert(character)
             print(f"{character['name']} has been saved!")
+        return character
 
     async def build_request(self, default_url):
         response = await self.http.post(default_url, data={"name": self.kwargs["name"]})

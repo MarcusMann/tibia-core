@@ -17,4 +17,4 @@ class Crawler(crawler.Crawler):
         )
 
     async def init(self):
-        await self.download()
+        return await self.download()

@@ -1,13 +1,16 @@
-from unittest import mock
+from unittest.mock import patch, AsyncMock
 from crawler.character import Crawler
 import pytest
 
 
 @pytest.mark.asyncio
-@mock.patch("crawler.character.Downloader", new_callable=mock.AsyncMock)
-async def test_character_crawler(mock_downloader, data_regression, output_html):
+@patch("crawler.character.Downloader", new_callable=AsyncMock)
+@patch("crawler.character.crawler.DB")
+async def test_character_crawler(
+    mock_db, mock_downloader, data_regression, output_html
+):
     downloader = mock_downloader.return_value
-    downloader.post.return_value = mock.AsyncMock(text=output_html)
+    downloader.post.return_value = AsyncMock(text=output_html)
 
     crawler = Crawler("community/?subtopic=characters", downloader, name="hello")
     response = await crawler.init()
