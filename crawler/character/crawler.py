@@ -1,4 +1,5 @@
 from .parser import Parser
+from db import DB
 
 
 class Crawler:
@@ -10,7 +11,11 @@ class Crawler:
 
     async def download(self):
         response = await self.build_request(self.default_url)
-        return self.parser.parse(response.text)
+        character = self.parser.parse(response.text)
+
+        with DB() as database:
+            database.characters.insert(character)
+            print(f"{character['name']} has been saved!")
 
     async def build_request(self, default_url):
         response = await self.http.post(default_url, data={"name": self.kwargs["name"]})
