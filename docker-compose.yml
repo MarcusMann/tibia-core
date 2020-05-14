@@ -1,17 +1,22 @@
-version: "3"
+version: '3'
 
 services:
   app:
+    container_name: "tibia-core"
     build: .
-    command: HTTPX_LOG_LEVEL=debug python main.py
-    depends_on:
-      - db
-    links:
-      - db
-    volumes:
+    command: python main.py
+    volumes: 
       - ".:/usr/app"
+    depends_on: 
+      - db
+    links: 
+      - db
   db:
     image: "mongo"
-    ports:
-      - "27017:27017"
+    container_name: "tibia-database"
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: docker
+      MONGO_INITDB_ROOT_PASSWORD: docker
+    ports: 
+      - "27017:27017"
