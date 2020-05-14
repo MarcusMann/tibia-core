@@ -1,10 +1,10 @@
 import re
 from contextlib import suppress
 
-import pymongo
 from bs4 import BeautifulSoup
 
 from .parser import Parser
+from db import DB
 
 GET_LINKS_REGEX = r"race"
 
@@ -25,13 +25,13 @@ class Crawler:
         with suppress(StopAsyncIteration):
             for link in links:
                 creature = await self.http.get(link)
-                data = self.parser.parse(creature)
+                data = await self.parser.parse(creature)
+                with DB() as database:
+                    database.creatures.insert(data)
+                    print(f"{data['name']} saved successfully!")
+                    print("\n\n================== Getting creature ==================\n\n")
                 self.creatures.append(data)
 
-    def save(self):
-        client = pymongo.MongoClient("mongodb://db")
-        collection = client.tibia.creatures
-        collection.insert_many(self.creatures)
 
     def get_creatures_links(self, raw):
         data = []
