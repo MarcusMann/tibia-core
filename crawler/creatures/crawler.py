@@ -20,7 +20,6 @@ class Crawler:
     async def download(self):
         response = await self.http.get(self.default_url)
         links = self.get_creatures_links(response)
-        creatures = []
 
         with suppress(StopAsyncIteration):
             for link in links:
@@ -29,9 +28,10 @@ class Crawler:
                 with DB() as database:
                     database.creatures.insert(data)
                     print(f"{data['name']} saved successfully!")
-                    print("\n\n================== Getting creature ==================\n\n")
+                    print(
+                        "\n\n================== Getting creature ==================\n\n"
+                    )
                 self.creatures.append(data)
-
 
     def get_creatures_links(self, raw):
         data = []
