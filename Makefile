@@ -14,7 +14,7 @@ format:
 
 .PHONY: test-update
 test-update:
-	@pytest --force-regen
+	@pytest -vv --force-regen
 
 
 .PHONY: clean-pyc clean-build clean

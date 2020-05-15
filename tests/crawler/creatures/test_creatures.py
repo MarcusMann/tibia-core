@@ -1,5 +1,7 @@
-from unittest.mock import patch, AsyncMock
+from unittest.mock import AsyncMock, patch
+
 import pytest
+
 from crawler.creatures.crawler import Crawler
 
 
@@ -14,8 +16,9 @@ async def test_crawler(
 
     creatures_html = AsyncMock(text=creatures_html)
     creature_html = AsyncMock(text=creature_html)
+    img = AsyncMock(content=b"tibia.jpg")
 
-    downloader.get.side_effect = [creatures_html, creature_html]
+    downloader.get.side_effect = [creatures_html, creature_html, img]
 
     crawler = Crawler(downloader, default_url)
     await crawler.download()

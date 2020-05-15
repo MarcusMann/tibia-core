@@ -24,7 +24,7 @@ class Crawler:
         with suppress(StopAsyncIteration):
             for link in links:
                 creature = await self.http.get(link)
-                data = await self.parser.parse(creature)
+                data = await self.parser.parse(creature, downloader=self.http)
                 with DB() as database:
                     database.creatures.insert(data)
                     print(f"{data['name']} saved successfully!")
