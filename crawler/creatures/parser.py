@@ -2,13 +2,16 @@ import base64
 
 from bs4 import BeautifulSoup
 
+
 class Parser:
     async def parse(self, creature, **kwargs):
         html = BeautifulSoup(creature.text, "html.parser")
         return {
             "name": self.extract_creature_name(html),
             "description": self.extract_creature_description(html),
-            "image": await self.extract_creature_image(html, downloader=kwargs["downloader"]),
+            "image": await self.extract_creature_image(
+                html, downloader=kwargs["downloader"]
+            ),
         }
 
     def extract_creature_name(self, raw):
